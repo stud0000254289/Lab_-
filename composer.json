@@ -1,0 +1,18 @@
+{
+    "name": "souleyman_sidick/my_project",
+    "description": "My PHP project with classes for users, articles, and comments",
+    "require": {
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "SouleymanSidick\\MyProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "stud0000254289",
+            "email": "stud0000254289@study.utmn.ru"
+        }
+    ]
+}
