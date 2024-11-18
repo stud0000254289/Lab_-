@@ -9,3 +9,4 @@ interface PostsRepositoryInterface {
     public function get(UuidInterface $uuid): ?Article;
     public function save(Article $article): void;
 }
+

@@ -3,9 +3,10 @@
 require 'vendor/autoload.php';
 require 'database.php';
 
-use SouleymanSidick\MyProject\Article;
 use SouleymanSidick\MyProject\Repositories\PostsRepository;
+use SouleymanSidick\MyProject\Article;
 use Ramsey\Uuid\Uuid;
+
 
 // Подключение к базе данных
 $db = getDatabaseConnection();
