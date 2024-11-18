@@ -2,16 +2,19 @@
 
 namespace SouleymanSidick\MyProject;
 
-class Comment {
-    public $id;
-    public $authorId;
-    public $articleId;
-    public $content;
+use Ramsey\Uuid\Uuid;
 
-    public function __construct($id, $authorId, $articleId, $content) {
-        $this->id = $id;
-        $this->authorId = $authorId;
-        $this->articleId = $articleId;
-        $this->content = $content;
+class Comment {
+    public string $uuid;
+    public string $postUuid;
+    public string $authorUuid;
+    public string $text;
+
+    public function __construct(string $postUuid, string $authorUuid, string $text) {
+        $this->uuid = Uuid::uuid4()->toString();
+        $this->postUuid = $postUuid;
+        $this->authorUuid = $authorUuid;
+        $this->text = $text;
     }
 }
+

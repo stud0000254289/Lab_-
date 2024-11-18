@@ -2,14 +2,19 @@
 
 namespace SouleymanSidick\MyProject;
 
-class User {
-    public $id;
-    public $firstName;
-    public $lastName;
+use Ramsey\Uuid\Uuid;
 
-    public function __construct($id, $firstName, $lastName) {
-        $this->id = $id;
+class User {
+    public string $uuid;
+    public string $username;
+    public string $firstName;
+    public string $lastName;
+
+    public function __construct(string $username, string $firstName, string $lastName) {
+        $this->uuid = Uuid::uuid4()->toString();
+        $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
     }
 }
+

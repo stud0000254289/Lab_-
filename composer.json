@@ -2,7 +2,8 @@
     "name": "souleyman_sidick/my_project",
     "description": "My PHP project with classes for users, articles, and comments",
     "require": {
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "ramsey/uuid": "^4.7"
     },
     "autoload": {
         "psr-4": {
