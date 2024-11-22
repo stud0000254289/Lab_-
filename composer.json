@@ -6,10 +6,10 @@
         "ramsey/uuid": "^4.7"
     },
     "autoload": {
-        "psr-4": {
-            "SouleymanSidick\\MyProject\\": "src/"
-        }
-    },
+    "psr-4": {
+        "SouleymanSidick\\MyProject\\": "src/"
+    }
+},
     "authors": [
         {
             "name": "stud0000254289",
