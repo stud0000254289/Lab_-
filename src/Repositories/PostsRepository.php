@@ -17,13 +17,14 @@ class PostsRepository implements PostsRepositoryInterface {
         $stmt = $this->db->prepare("SELECT * FROM posts WHERE uuid = :uuid");
         $stmt->execute([':uuid' => $uuid->toString()]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($data) {
-            return new Article($data['author_uuid'], $data['title'], $data['text']);
+            return new Article($data['uuid'], $data['author_uuid'], $data['title'], $data['text']);
         }
-
+    
         return null;
     }
+    
 
     public function save(Article $article): void {
         $stmt = $this->db->prepare("INSERT INTO posts (uuid, author_uuid, title, text) VALUES (:uuid, :author_uuid, :title, :text)");

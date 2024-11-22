@@ -16,18 +16,18 @@ $postsRepository = new PostsRepository($db);
 
 // Массив с данными для новых статей
 $articlesData = [
-    ['Заголовок статьи 1', 'Текст статьи 1'],
-    ['Заголовок статьи 2', 'Текст статьи 2'],
-    ['Заголовок статьи 3', 'Текст статьи 3'],
-    ['Заголовок статьи 4', 'Текст статьи 4'],
-    ['Заголовок статьи 5', 'Текст статьи 5']
+    ['author-uuid-1', 'Заголовок статьи 1', 'Текст статьи 1'],
+    ['author-uuid-2', 'Заголовок статьи 2', 'Текст статьи 2'],
+    ['author-uuid-3', 'Заголовок статьи 3', 'Текст статьи 3'],
+    ['author-uuid-4', 'Заголовок статьи 4', 'Текст статьи 4'],
+    ['author-uuid-5', 'Заголовок статьи 5', 'Текст статьи 5']
 ];
 
 // Добавление статей в базу данных
 foreach ($articlesData as $data) {
-    $article = new Article(Uuid::uuid4()->toString(), $data[0], $data[1]);
+    $article = new Article(Uuid::uuid4()->toString(), $data[0], $data[1], $data[2]);
     $postsRepository->save($article);
-    echo "Статья сохранена с UUID: " . $article->uuid . " и заголовком: " . $data[0] . PHP_EOL;
+    echo "Статья сохранена с UUID: " . $article->uuid . " и заголовком: " . $data[1] . PHP_EOL;
 }
 
 // Получение и вывод всех статей
@@ -40,5 +40,3 @@ foreach ($articlesData as $data) {
         echo "Статья не найдена." . PHP_EOL;
     }
 }
-
-
