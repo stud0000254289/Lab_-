@@ -38,3 +38,4 @@ foreach ($articles as $article) {
     echo "Заголовок: " . htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . "<br>";
     echo "Текст: " . htmlspecialchars($article['text'], ENT_QUOTES, 'UTF-8') . "<br><br>";
 }
+
