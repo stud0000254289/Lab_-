@@ -10,6 +10,9 @@ use Ramsey\Uuid\Uuid;
 // Подключение к базе данных
 $db = getDatabaseConnection();
 
+// Очистка таблицы перед добавлением новых записей
+$db->exec("DELETE FROM posts");
+
 // Инициализация репозитория статей
 $postsRepository = new PostsRepository($db);
 
@@ -38,5 +41,6 @@ foreach ($articles as $article) {
     echo "Заголовок: " . htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . "<br>";
     echo "Текст: " . htmlspecialchars($article['text'], ENT_QUOTES, 'UTF-8') . "<br><br>";
 }
+
 
 
