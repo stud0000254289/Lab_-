@@ -39,3 +39,4 @@ foreach ($articles as $article) {
     echo "Текст: " . htmlspecialchars($article['text'], ENT_QUOTES, 'UTF-8') . "<br><br>";
 }
 
+
