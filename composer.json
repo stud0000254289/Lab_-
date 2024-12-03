@@ -6,10 +6,18 @@
         "ramsey/uuid": "^4.7"
     },
     "autoload": {
-    "psr-4": {
-        "SouleymanSidick\\MyProject\\": "src/"
-    }
-},
+        "psr-4": {
+            "SouleymanSidick\\MyProject\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "stud0000254289",
@@ -17,3 +25,4 @@
         }
     ]
 }
+
