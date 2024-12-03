@@ -7,7 +7,6 @@ use SouleymanSidick\MyProject\Repositories\PostsRepository;
 use SouleymanSidick\MyProject\Article;
 use Ramsey\Uuid\Uuid;
 
-
 // Подключение к базе данных
 $db = getDatabaseConnection();
 
@@ -27,16 +26,15 @@ $articlesData = [
 foreach ($articlesData as $data) {
     $article = new Article(Uuid::uuid4()->toString(), $data[0], $data[1], $data[2]);
     $postsRepository->save($article);
-    echo "Статья сохранена с UUID: " . $article->uuid . " и заголовком: " . $data[1] . PHP_EOL;
+    echo "Статья сохранена с UUID: " . $article->uuid . " и заголовком: " . $data[1] . "<br>";
 }
 
 // Получение и вывод всех статей
-echo PHP_EOL . "Сохраненные статьи:" . PHP_EOL;
-foreach ($articlesData as $data) {
-    $retrievedArticle = $postsRepository->get(Uuid::fromString($article->uuid));
-    if ($retrievedArticle) {
-        echo "Заголовок: " . $retrievedArticle->title . PHP_EOL;
-    } else {
-        echo "Статья не найдена." . PHP_EOL;
-    }
+echo "<br>Сохраненные статьи:<br>";
+$stmt = $db->query("SELECT title, text FROM posts");
+$articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($articles as $article) {
+    echo "Заголовок: " . htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Текст: " . htmlspecialchars($article['text'], ENT_QUOTES, 'UTF-8') . "<br><br>";
 }
