@@ -36,17 +36,22 @@ class CommentsRepository implements CommentsRepositoryInterface {
    
 
     public function save(Comment $comment): void {
-        $stmt = $this->db->prepare("INSERT INTO comments (uuid, post_uuid, author_uuid, text) VALUES (:uuid, :post_uuid, :author_uuid, :text)");
-        $stmt->execute([
-            ':uuid' => $comment->uuid,
-            ':post_uuid' => $comment->postUuid,
-            ':author_uuid' => $comment->authorUuid,
-            ':text' => $comment->text,
-        ]);
-    
-        // Временный вывод данных для проверки
-        $stmt = $this->db->query("SELECT * FROM comments");
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       // Пример сохранения статьи
+$stmt = $db->prepare("INSERT INTO posts (uuid, title, text) VALUES (:uuid, :title, :text)");
+$stmt->execute([
+    ':uuid' => $article->uuid,
+    ':title' => $article->title,
+    ':text' => $article->text,
+]);
+
+// Пример выборки статей
+$stmt = $db->query("SELECT title FROM posts");
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($posts as $post) {
+    echo "Заголовок: " . $post['title'] . "<br>";
+}
+
        
     }
     
