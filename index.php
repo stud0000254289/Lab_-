@@ -14,7 +14,7 @@ $db = getDatabaseConnection();
 
 // Очистка таблицы статей перед добавлением новых записей
 $db->exec("DELETE FROM posts");
-$db->exec("DELETE FROM comments"); // Очистка таблицы комментариев (если нужно)
+
 
 // Инициализация репозиториев
 $postsRepository = new PostsRepository($db);
