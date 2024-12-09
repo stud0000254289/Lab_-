@@ -14,6 +14,7 @@ $db = getDatabaseConnection();
 
 // Очистка таблицы статей перед добавлением новых записей
 $db->exec("DELETE FROM posts");
+$db->exec("DELETE FROM comments"); // Очистка таблицы комментариев (если нужно)
 
 // Инициализация репозиториев
 $postsRepository = new PostsRepository($db);
@@ -81,16 +82,34 @@ if ($requestMethod === 'POST' && strpos($requestUri, '/posts/comment') === 0) {
         echo json_encode(['error' => $e->getMessage()]);
     }
 } else {
-    // Вывод всех статей
-    echo "<br>Сохраненные статьи:<br>";
-    $stmt = $db->query("SELECT title, text FROM posts");
+    // Вывод всех статей с комментариями
+    echo "<br>Сохраненные статьи с комментариями:<br>";
+    $stmt = $db->query("SELECT * FROM posts");
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($articles as $article) {
-        echo "Заголовок: " . htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . "<br>";
-        echo "Текст: " . htmlspecialchars($article['text'], ENT_QUOTES, 'UTF-8') . "<br><br>";
+        echo "<br>Заголовок: " . htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . "<br>";
+        echo "Текст: " . htmlspecialchars($article['text'], ENT_QUOTES, 'UTF-8') . "<br>";
+
+        // Вывод комментариев для статьи
+        $postUuid = $article['uuid'];
+        $commentStmt = $db->prepare("SELECT * FROM comments WHERE post_uuid = :post_uuid");
+        $commentStmt->execute([':post_uuid' => $postUuid]);
+        $comments = $commentStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($comments) {
+            echo "Комментарии:<br>";
+            foreach ($comments as $comment) {
+                echo "- " . htmlspecialchars($comment['text'], ENT_QUOTES, 'UTF-8') . " (Автор: " . htmlspecialchars($comment['author_uuid'], ENT_QUOTES, 'UTF-8') . ")<br>";
+            }
+        } else {
+            echo "Нет комментариев.<br>";
+        }
+
+        echo "<br>";
     }
 }
+
 
 
 
