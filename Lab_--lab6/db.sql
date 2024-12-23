@@ -1,0 +1,26 @@
+-- Создаем таблицу users
+CREATE TABLE users (
+    uuid TEXT PRIMARY KEY,
+    username TEXT,
+    first_name TEXT,
+    last_name TEXT
+);
+
+-- Создаем таблицу posts
+CREATE TABLE posts (
+    uuid TEXT PRIMARY KEY,
+    author_uuid TEXT,
+    title TEXT,
+    text TEXT,
+    FOREIGN KEY (author_uuid) REFERENCES users(uuid)
+);
+
+-- Создаем таблицу comments
+CREATE TABLE comments (
+    uuid TEXT PRIMARY KEY,
+    post_uuid TEXT,
+    author_uuid TEXT,
+    text TEXT,
+    FOREIGN KEY (post_uuid) REFERENCES posts(uuid),
+    FOREIGN KEY (author_uuid) REFERENCES users(uuid)
+);
